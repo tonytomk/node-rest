@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var express_1 = __importDefault(require("express"));
 var app = express_1.default();
+app.get('/', function (req, res) {
+    res.send("<div>\n<h1>Welcome</h1>\n<p>API Details</p>\n<a href=\"https://rest-node-t.herokuapp.com/data.json\" target=\"_blank\">Set 1</a>\n</div>");
+});
 app.get(('/data.json'), function (req, res) {
     var data = fs_1.default.readFileSync('./data/football.csv', {
         encoding: 'utf-8',

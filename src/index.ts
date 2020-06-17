@@ -3,7 +3,13 @@ import  express, {Request, Response} from 'express';
 
 
 const app = express();
-
+app.get('/', (req,res) => {
+res.send(`<div>
+<h1>Welcome</h1>
+<p>API Details</p>
+<a href="https://rest-node-t.herokuapp.com/data.json" target="_blank">Set 1</a>
+</div>`)
+});
 app.get(('/data.json'),(req: Request, res: Response) => {
     let data = fs.readFileSync('./data/football.csv', {
         encoding:'utf-8',
