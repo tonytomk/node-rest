@@ -10,6 +10,7 @@ res.send(`<div>
 <a href="https://rest-node-t.herokuapp.com/data.json" target="_blank">Set 1</a>
 </div>`)
 });
+// app.set('json spaces', 4)
 app.get(('/data.json'),(req: Request, res: Response) => {
     let data = fs.readFileSync('./data/football.csv', {
         encoding:'utf-8',
@@ -20,16 +21,18 @@ app.get(('/data.json'),(req: Request, res: Response) => {
     for(var i=1; i<data.length; i++) {
   
         var obj: any = {};
-        var currentline=data[i].split(",");
+        var currentline = data[i].split(",");
   
-        for(var j=0;j<headers.length;j++){
+        for(var j=0; j<headers.length; j++){
             obj[headers[j]] = currentline[j];
         }
         result.push(obj);
   
     }
-    console.dir(result);
-    res.json(result);
+   
+    res.header("Content-Type",'application/json');
+    res.send(JSON.stringify(result, null, 4));
+    // res.json(result);
 
 });
 

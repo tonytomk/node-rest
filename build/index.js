@@ -9,6 +9,7 @@ var app = express_1.default();
 app.get('/', function (req, res) {
     res.send("<div>\n<h1>Welcome</h1>\n<p>API Details</p>\n<a href=\"https://rest-node-t.herokuapp.com/data.json\" target=\"_blank\">Set 1</a>\n</div>");
 });
+// app.set('json spaces', 4)
 app.get(('/data.json'), function (req, res) {
     var data = fs_1.default.readFileSync('./data/football.csv', {
         encoding: 'utf-8',
@@ -23,8 +24,9 @@ app.get(('/data.json'), function (req, res) {
         }
         result.push(obj);
     }
-    console.dir(result);
-    res.json(result);
+    res.header("Content-Type", 'application/json');
+    res.send(JSON.stringify(result, null, 4));
+    // res.json(result);
 });
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
